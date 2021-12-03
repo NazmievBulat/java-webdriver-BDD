@@ -9,9 +9,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.File;
 import java.util.Date;
 import java.util.Iterator;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static support.TestContext.getDriver;
 
@@ -221,4 +223,28 @@ public class PredefinedStepDefs {
     public void iMouseOverElementWithXpath(String xpath) {
         new Actions(getDriver()).moveToElement(getDriver().findElement(By.xpath(xpath))).perform();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    void toSwap(int num1, int num2){
+        System.out.println("Swap method begin - num1: " + num1 + " num2: " + num2);
+//        int temp = num1;
+//        num1 = num2;
+//        num2 = temp;
+        num1 = num1 + num2;
+        num2 = num1 - num2;
+        num1 = num1 - num2;
+
+        System.out.println("Swap method begin - num1: " + num1 + " num2: " + num2);
+    }
 }
+
