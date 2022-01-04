@@ -241,8 +241,8 @@ public class JavaStepDefs {
         }
     }
 
-//    @And("I solve coding challenges")
-//    public void iSolveCodingChallenges() {
+    @And("I solve coding challenges")
+    public void iSolveCodingChallenges() {
 //        toSwap(3, 5);
 //
 //    }
@@ -250,7 +250,9 @@ public class JavaStepDefs {
 //            if (num % 3 == 0 && num % 4 == 0) {
 //                System.out.println();
 //            }
-//        }
+
+
+    }
     @And("I work with Arrays")
     public void iWorkWithArrays() {
 

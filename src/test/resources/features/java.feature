@@ -22,5 +22,5 @@
 #      And I work with Arrays
 #      And I create multiplication table for numbers up to 9
       And I work with Arrays of lists
-      And I solve coding challenges
+#      And I solve coding challenges
 

@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.io.FileUtils;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -131,7 +132,7 @@ public class PredefinedStepDefs {
     @Then("element with xpath {string} should contain text {string}")
     public void elementWithXpathShouldContainText(String xpath, String text) {
         String actualText = getDriver().findElement(By.xpath(xpath)).getText();
-        assertThat(actualText).containsIgnoringCase(text);
+        Assertions.assertThat(actualText).containsIgnoringCase(text);
     }
 
     @Then("element with xpath {string} should not contain text {string}")
