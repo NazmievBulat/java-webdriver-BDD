@@ -2,6 +2,8 @@ package definitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import pages.Cat;
+import pages.Dog;
 
 import java.util.Arrays;
 
@@ -384,7 +386,16 @@ public class JavaStepDefs {
     }
 
 
+    @And("I work with Classes")
+    public void iWorkWithClasses() {
+        Cat cat = new Cat("Tom");
+        cat.eat("fish");
+        cat.walk();
 
+        Dog dog = new Dog("Bobby");
+        dog.eat("fish");
+        dog.walk();
+    }
 }
 
 

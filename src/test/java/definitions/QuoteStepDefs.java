@@ -5,31 +5,38 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static support.TestContext.getData;
 import static support.TestContext.getDriver;
 
 public class QuoteStepDefs {
+
+    Map<String, String> user = getData("user");
+
     @When("I fill out required page")
     public void iFillOutRequiredPage() {
-        getDriver().findElement(By.xpath("//input[@name='username']")).sendKeys("jdoe");
-        getDriver().findElement(By.xpath("//input[@name='email']")).sendKeys("jdoe@gmail.com");
+        getDriver().findElement(By.xpath("//input[@name='username']")).sendKeys(user.get("username"));
+        getDriver().findElement(By.xpath("//input[@name='email']")).sendKeys(user.get("email"));
         //getDriver().findElement(By.xpath("//input[@name='name']")).click();
 
         WebElement nameElement = getDriver().findElement(By.xpath("//input[@name='name']"));
         nameElement.click();
 
 
-        getDriver().findElement(By.xpath("//input[@id='firstName']")).sendKeys("John");
-        getDriver().findElement(By.xpath("//input[@id='lastName']")).sendKeys("Doe");
+        getDriver().findElement(By.xpath("//input[@id='firstName']")).sendKeys(user.get("firstName"));
+        getDriver().findElement(By.xpath("//input[@id='lastName']")).sendKeys(user.get("lastName"));
         getDriver().findElement(By.xpath("//span[contains(text(),'Save')]")).click();
 
         String nameValue = nameElement.getAttribute("value");
         System.out.println(nameValue);
 
 
-        getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys("welcome");
-        getDriver().findElement(By.xpath("//input[@id='confirmPassword']")).sendKeys("welcome");
+        getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys(user.get("password"));;
+        getDriver().findElement(By.xpath("//input[@id='confirmPassword']")).sendKeys(user.get("password"));
         getDriver().findElement(By.xpath("//input[@name='agreedToPrivacyPolicy']")).click();
 
 
@@ -45,11 +52,11 @@ public class QuoteStepDefs {
     @Then("I verify the required fields")
     public void iVerifyTheRequiredFields() {
         String result = getDriver().findElement(By.xpath("//div[@id='quotePageResult']")).getText();
-        assertThat(result).contains("John Doe");
-        assertThat(result).contains("John Doe");
-        assertThat(result).contains("jdoe");
-        assertThat(result).contains("jdoe@gmail.com");
-        assertThat(result).doesNotContain("welcome");
+        assertThat(result).contains(user.get("username"));;
+        assertThat(result).contains(user.get("email"));
+        assertThat(result).contains(user.get("firstName"));
+        assertThat(result).contains(user.get("lastName"));
+        assertThat(result).doesNotContain(user.get("password"));
 
 
 
@@ -77,4 +84,25 @@ public class QuoteStepDefs {
         assertThat(result).contains("03/15/2002");
         assertThat(result).contains("\"4970 El Camino Real\" street, \"Los Altos\" city, \"CA\" state");
     }
+
+    @And("I multi select {string}, {string}, {string}")
+    public void iMultiSelect(String firstCar, String secondCar, String thirdCar) {
+        WebElement firstChoseCar = getDriver().findElement(By.xpath("//option[@value='" +firstCar+ "']"));
+        WebElement secondChoseCar = getDriver().findElement(By.xpath("//option[@value='" +secondCar+ "']"));
+        WebElement thirdChoseCar = getDriver().findElement(By.xpath("//option[@value='" +thirdCar+ "']"));
+        WebElement carContainer = getDriver().findElement(By.xpath("//select[@name='carMake']"));
+//        new Actions(getDriver()).
+//                click(firstChoseCar).
+//                moveToElement(secondChoseCar).
+//                keyDown(Keys.COMMAND).click().
+//                moveToElement(thirdChoseCar).
+//                keyDown(Keys.COMMAND).click().
+//                perform();
+
+        Select objSelect = new Select(carContainer);
+        objSelect.selectByVisibleText(firstCar);
+        objSelect.selectByVisibleText(secondCar);
+        objSelect.selectByVisibleText(thirdCar);
+    }
+
 }

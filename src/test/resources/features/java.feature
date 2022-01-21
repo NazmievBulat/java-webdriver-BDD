@@ -21,6 +21,7 @@
 #      And I write a program that takes a number 3 and gives the possibility to chose between computing the "product"
 #      And I work with Arrays
 #      And I create multiplication table for numbers up to 9
-      And I work with Arrays of lists
+#      And I work with Arrays of lists
 #      And I solve coding challenges
+      And I work with Classes
 
