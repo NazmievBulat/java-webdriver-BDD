@@ -393,7 +393,7 @@ public class JavaStepDefs {
         cat.walk();
 
         Dog dog = new Dog("Bobby");
-        dog.eat("fish");
+        dog.eat("meet");
         dog.walk();
     }
 }
