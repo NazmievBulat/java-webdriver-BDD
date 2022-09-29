@@ -1,0 +1,12 @@
+admin:
+  username: rroe
+  email: rroe@exaple
+  password: password
+  firstName: Richard
+  lastName: Roe
+user:
+  username: jdoe
+  email: jdoe@exaple
+  password: welcome
+  firstName: John
+  lastName: Doe

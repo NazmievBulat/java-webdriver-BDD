@@ -1,0 +1,13 @@
+recruiter:
+  email: student@example.com
+  password: welcome
+
+candidate:
+  email: xyz@example.com
+  password: welcome
+
+position:
+  title: QA manual
+  description: bla bla
+  city: Los Angeles
+  state: California

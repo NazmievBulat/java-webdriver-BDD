@@ -22,44 +22,139 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TestContext {
 
     public static WebDriver driver;
+    private static Map<String, Object> testData = new HashMap<>();
+
+    private static String timestamp;
+
+    public static void setTimeStamp(){
+        timestamp = new SimpleDateFormat("+yyyy-MM-dd-hh-mm-ss").format(new Date());
+    }
+    public static String getTimestamp(){
+        return timestamp;
+    }
+
+    public static void saveData(String key, Object data){
+        testData.put(key, data);
+    }
+
+    public static Integer readTestDataInteger(String key){
+
+        return (Integer) testData.get(key);
+    }
+
+    public static String readTestDataString(String key){
+
+        return (String) testData.get(key);
+    }
+
+    public static Map<String, Object> readTestDataMap(String key){
+
+        return (Map<String, Object>) testData.get(key);
+    }
 
     public static WebDriver getDriver() {
         return driver;
     }
 
     public static void initialize() {
-        initialize("chrome", "local", false);
+        initialize(getConfig().browser, getConfig().runType, getConfig().headless);
     }
 
     public static void teardown() {
         driver.quit();
     }
 
-    public static Map<String, String> getData(String fileName){
-        String filePath = System.getProperty("user.dir") + "/src/test/resources/data/" + fileName + ".yml";
+    public static Map<String, String> getData(String dataKey){
+       return getData(dataKey,"config");
+    }
+
+    public static Config getConfig() {
+        InputStream stream = getStream("config");
+        Config config = new Yaml().loadAs(stream, Config.class);
+        return config;
+    }
+
+    public static Map<String, String> getPositionDataFromFile(String dataKey, String project){
+        Map<String, String> position = getData(dataKey, project);
+//        Random rand = new Random();
+//        int num = rand.nextInt(10000) + 1;
+
+        String timestamp = new SimpleDateFormat("+yyyy-MM-dd-hh-mm-ss").format(new Date());
+        String originalTitle = position.get("title");
+        String newTitle = originalTitle + " " + timestamp;
+        position.put("title", newTitle);
+
+        return position;
+    }
+
+    public static Candidate getCandidateFromFile(String fileName){
+        InputStream stream = getStream(fileName);
+        Candidate candidate = new Yaml().loadAs(stream, Candidate.class);
+        String originalEmail = candidate.getEmail();
+        if (originalEmail != null && !originalEmail.isEmpty()){
+            String[] emailParts = originalEmail.split("@");
+            String newEmail = emailParts[0] + timestamp + "@" + emailParts[1];
+            candidate.setEmail(newEmail);
+        }
+
+        return candidate;
+////        Random rand = new Random();
+////        int num = rand.nextInt(10000) + 1;
+//
+//        String timestamp = new SimpleDateFormat("+yyyy-MM-dd-hh-mm-ss").format(new Date());
+//        String originalTitle = candidate.get("title");
+//        String newTitle = originalTitle + " " + timestamp;
+//        candidate.put("title", newTitle);
+//
+//        return candidate;
+    }
+
+    public static Map<String, String> getCandidateDataFromFile(String dataKey, String project){
+        Map<String, String> candidate = getData(dataKey, project);
+//        Random rand = new Random();
+//        int num = rand.nextInt(10000) + 1;
+        //Creating unique email
+        String timestamp = new SimpleDateFormat("+yyyy-MM-dd-hh-mm-ss").format(new Date());
+        String originalEmail = candidate.get("email");
+        String newEmail = originalEmail + " " + timestamp;
+        candidate.put("email", newEmail);
+
+        return candidate;
+    }
+
+    public static Map<String, String> getData(String dataKey, String project){
+        InputStream stream = getStream(project);
+        Map<String, Map<String, String>> mapOfMaps = new Yaml().load((stream));
+        Map<String, String> testData = mapOfMaps.get(dataKey);
+
+        return testData;
+    }
+
+
+    private static InputStream getStream(String project){
         try {
-            FileInputStream stream = new FileInputStream(filePath);
-            Yaml yaml = new Yaml();
-            return yaml.load(stream);
+            String filePath = System.getProperty("user.dir") + "/src/test/resources/data/" + project + ".yml";
+            return new FileInputStream(filePath);
         }catch (FileNotFoundException e){
             throw new Error(e);
         }
-
-
     }
 
 
     public static void initialize(String browser, String testEnv, boolean isHeadless) {
-        Dimension size = new Dimension(1920, 1080);
+        Dimension size = new Dimension(getConfig().browserWidth, getConfig().browserHeight);
         Point position = new Point(0, 0);
         if (testEnv.equals("local")) {
             switch (browser) {

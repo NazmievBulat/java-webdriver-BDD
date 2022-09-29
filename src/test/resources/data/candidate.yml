@@ -1,0 +1,36 @@
+John:
+ firstName: John
+ middleName: B
+ lastName: Doe
+ email: string23@gmail.com
+ password: string
+ address: string
+ city: string1
+ state: string
+ zip: string
+ summary: string
+
+
+John updated:
+  firstName: John
+  middleName: B
+  lastName: Doe
+  email: string@1mail.com
+  password: string
+  address: string
+  city: string1
+  state: string
+  zip: string
+  summary: string
+
+sdet:
+   firstName: John
+   middleName: B
+   lastName: Doe
+   email: strinrw@gmail.com
+   password: string
+   address: string
+   city: string1
+   state: string
+   zip: string
+   summary: Sdet candidate

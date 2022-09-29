@@ -4,9 +4,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 import static support.TestContext.getDriver;
 
-public class QuoteForm {
+public class QuoteForm extends Page{
 
     //constructor
     public QuoteForm(){
@@ -50,12 +52,11 @@ public class QuoteForm {
     @FindBy(xpath = "//button[@id='formSubmit']")
     private WebElement submitButton;
 
-    @FindBy(xpath = "//div[@class='well form-container container-fluid']")
-    private WebElement resultContainer;
+
 
     // Fields required message
     @FindBy(xpath = "//label[@id='username-error']")
-    private WebElement usernameError;
+    private List<WebElement> usernameError;
     @FindBy(xpath = "//label[@id='email-error']")
     private WebElement emailError;
     @FindBy(xpath = "//label[@id='password-error']")
@@ -100,11 +101,21 @@ public class QuoteForm {
         submitButton.click();
     }
 
-    public String getResultContainer(){
-        return resultContainer.getText();
+
+
+//    public invUsernameError(){
+//       return usernameError == usernameError.size = 0
+//
+//    }
+
+    public int invUsernameError(){
+        return usernameError.size();
     }
 
-    public void invUsernameError(){
+    public void invNameError() {
+        if (!emailError.isDisplayed()) {
+
+        }
     }
 
 }

@@ -1,0 +1,20 @@
+origin:
+  name: John Doe
+  country: United States
+  address: 22111 Erwin Street, Los Angeles, CA 91367
+  email: jdoe@example.com
+  phone: "7473820349"
+  exp address: 22111 Erwin Street, Los Angeles, CA 91367
+destination:
+  name: Richard Roe
+  country: United States
+  address: 4970 El Camino Real, Los Altos, CA 94022
+package:
+  type: My Packaging
+  weight: "10"
+  length: "2"
+  width: "3"
+  heiqht: "4"
+  value: "200"
+guided:
+  description: Candys

@@ -7,6 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
+import pages.CareersHome;
 
 import static support.TestContext.getDriver;
 
@@ -20,6 +21,7 @@ public class GenericStepDefs {
             case "usps" -> getDriver().get("https://www.usps.com");
             case "unitconverts" -> getDriver().get("https://www.unitconverters.net");
             case "calculator" -> getDriver().get("https://www.calculator.net");
+            case "careers" -> new CareersHome().open();
             default -> throw new Error("Unsupported page " + page);
         }
         System.out.println(getDriver().getTitle());
