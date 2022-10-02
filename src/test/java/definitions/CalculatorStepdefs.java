@@ -50,7 +50,7 @@ public class CalculatorStepdefs {
     @Then("I verify {string} calculator error")
     public void iVerifyCalculatorError(String error) {
         String result = getDriver().findElement(By.xpath("//td[@valign='top']//div/..")).getText();
-
+        // Assertion
         assertThat(result).contains(error);
 
     }
