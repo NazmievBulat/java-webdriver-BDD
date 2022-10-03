@@ -74,6 +74,7 @@ public class CareersStepDefs {
 
     @When("I remove new position")
     public void iRemoveNewPosition() {
+        //removing created position
         Map<String, String> positionData = getData("position", "careers");
         recruit.deleteElementByRole(positionData.get("title"));
 

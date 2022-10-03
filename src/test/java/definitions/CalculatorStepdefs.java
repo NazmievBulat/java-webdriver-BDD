@@ -57,9 +57,12 @@ public class CalculatorStepdefs {
 
     @And("I enter {string} price, {string} months, {string} interest, " +
             "{string} downpayment, {string} trade-in, {string} state, {string} percent tax, {string} fees")
-    public void iEnterPriceMonthsInterestDownpaymentTradeInStatePercentTaxFees(String price, String months, String interest,
-                                                                               String downPaymentE, String tradeIn, String state,
-                                                                               String percentTax, String fees) {
+    public void iEnterPriceMonthsInterestDownpaymentTradeInStatePercentTaxFees(
+            String price, String months, String interest,
+
+            String downPaymentE, String tradeIn, String state,
+
+            String percentTax, String fees) {
         getDriver().findElement(autoPrice).sendKeys(price);
         getDriver().findElement(loanTerm).sendKeys(months);
         getDriver().findElement(interestRate).sendKeys(interest);
