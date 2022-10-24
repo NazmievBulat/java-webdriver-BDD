@@ -22,6 +22,9 @@ public class GenericStepDefs {
             case "unitconverts" -> getDriver().get("https://www.unitconverters.net");
             case "calculator" -> getDriver().get("https://www.calculator.net");
             case "careers" -> new CareersHome().open();
+            case "linkedin" -> getDriver().get("https://www.linkedin.com/checkpoint/rm/sign-in-another-account?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin");
+            case "job" -> getDriver().get("https://www.linkedin.com/jobs/search/?currentJobId=3296068353&distance=25&f_AL=true&geoId=103736294&keywords=Quality%20Assurance");
+
             default -> throw new Error("Unsupported page " + page);
         }
         System.out.println(getDriver().getTitle());
