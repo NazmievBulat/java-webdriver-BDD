@@ -42,7 +42,7 @@ public class LinledinJobsPage extends Page {
     @FindBy(xpath = "//span[@class='artdeco-button__text'][normalize-space()='Save']")
     private WebElement saveButton;
     @FindBy(xpath = "//*[text() ='Continue']")
-    private WebElement anotherSubmit;
+    private List <WebElement> continueButton;
 
     @FindBy(xpath = "//span[normalize-space()='Done']")
     private WebElement doneButton;
@@ -63,59 +63,85 @@ public class LinledinJobsPage extends Page {
 
     public void applyForJobs() {
 
+        int a = 0;
 
 
 
 
-        for (int i = 0; i < 25; i++)
-        {
-                if (easyApplyList.size() > 0) {
 
 
-                    try {
+        for (int r = 2; r < 40; r++){
+        for (int i = 0; i < 25; i++) {
+            if (isClickable(easyApply) && continueButton.size() == 0) {
 
-                        easyApply.click();
-                    }
-                    catch(org.openqa.selenium.StaleElementReferenceException ex)
-                    {
 
-                        easyApply.click();
-                    }
+                try {
+
+                    easyApply.click();
+                } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+
+                    easyApply.click();
+                }
 //                   easyApply.click();
 
 
-                    while (nextList.size() > 0 && errorMessage.size() == 0) {
 
-                        next.click();
+                while (reviewList.size() == 0 && errorMessage.size() == 0 && listSubmit.size() == 0) {
 
+                    next.click();
 
-
-                    }
-                    if(reviewList.size() > 0){
-                        review.click();
-                    }
-                    if (listSubmit.size() > 0) {
-                        submit.click();
-                        doneButton.click();
-
-                    }
-                    if(errorMessage.size() > 0) {
-                        exitButton.click();
-                        WebDriverWait wait = new WebDriverWait(driver, 3);
-                        wait.until(ExpectedConditions.elementToBeClickable(saveButton));
-
-                        saveButton.click();
-                    }
 
                 }
-                //int i = 0;
+                if (reviewList.size() > 0) {
+                    review.click();
+                }
+                if (listSubmit.size() > 0) {
+                    submit.click();
+                    a += 1;
+                    System.out.println("I applied for " + a + " applications");
+                    doneButton.click();
 
-                WebElement element = driver.findElement(By.xpath("//div[contains(@class,'job-card-container--viewport-tracking-" + i + "')]"));
-                JavascriptExecutor js = (JavascriptExecutor) driver;
-                js.executeScript("arguments[0].click();", element);
-                js.executeScript("arguments[0].scrollIntoView(true);", element);
+                }
+                if (errorMessage.size() > 0) {
+
+                    exitButton.click();
+                    WebDriverWait wait = new WebDriverWait(driver, 3);
+                    wait.until(ExpectedConditions.elementToBeClickable(saveButton));
+
+                    saveButton.click();
+                }
+
+            }
+            //int i = 0;
+
+            try
+            {
+            WebElement element = driver.findElement(By.xpath("//div[contains(@class,'job-card-container--viewport-tracking-" + i + "')]"));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", element);
+            js.executeScript("arguments[0].scrollIntoView(true);", element);
+
+        }
+            catch(org.openqa.selenium.NoSuchElementException ex){
+                //System.out.println("Element does not exist!");
+
+                i += 1;
+            }
 
 
+//
+//                if(i == 24){
+//
+//                }
+
+        }
+
+
+            WebElement page = driver.findElement(By.xpath("//button[@aria-label='Page " + r + "']"));
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", page);
+
+//        page.click();
             }
 
         }

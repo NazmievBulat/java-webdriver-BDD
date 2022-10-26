@@ -22,6 +22,6 @@ public class LinledinLoginPage extends Page{
         email.sendKeys("login");
         password.sendKeys("password");
         signInButton.click();
-        new WebDriverWait(driver, 15).until(ExpectedConditions.urlContains("https://www.linkedin.com/feed"));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("https://www.linkedin.com/feed"));
     }
 }
