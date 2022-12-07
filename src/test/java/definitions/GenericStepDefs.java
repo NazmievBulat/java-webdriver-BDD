@@ -7,6 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
+import pages.BoeingHome;
 import pages.CareersHome;
 
 import static support.TestContext.getDriver;
@@ -23,7 +24,8 @@ public class GenericStepDefs {
             case "calculator" -> getDriver().get("https://www.calculator.net");
             case "careers" -> new CareersHome().open();
             case "linkedin" -> getDriver().get("https://www.linkedin.com/checkpoint/rm/sign-in-another-account?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin");
-            case "job" -> getDriver().get("https://www.linkedin.com/jobs/search/?currentJobId=3291325595&f_AL=true&geoId=103736294&keywords=qa&location=Denver%2C%20Colorado%2C%20United%20States&refresh=true&sortBy=R");
+            case "job" -> getDriver().get("https://www.linkedin.com/jobs/search/?currentJobId=3339961879&f_AL=true&f_F=qa&geoId=90000034&location=Denver%20Metropolitan%20Area&refresh=true&sortBy=R");
+            case "boeing" -> new BoeingHome().open();
 
             default -> throw new Error("Unsupported page " + page);
         }

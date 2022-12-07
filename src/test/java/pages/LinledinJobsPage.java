@@ -18,6 +18,9 @@ public class LinledinJobsPage extends Page {
     @FindBy(xpath = "(//span[@class='artdeco-button__text'][normalize-space()='Easy Apply'])[1]")
     private WebElement easyApply;
 
+    @FindBy(xpath = "(//li-icon[@type='cancel-icon'])[1]")
+    private WebElement cancelButton;
+
     @FindBy(xpath = "//span[normalize-space()='Next']")
     private WebElement next;
 
@@ -81,6 +84,9 @@ public class LinledinJobsPage extends Page {
                 } catch (org.openqa.selenium.StaleElementReferenceException ex) {
 
                     easyApply.click();
+                } catch (org.openqa.selenium.ElementClickInterceptedException ex) {
+
+                    i += 1;
                 }
 //                   easyApply.click();
 
@@ -96,10 +102,17 @@ public class LinledinJobsPage extends Page {
                     review.click();
                 }
                 if (listSubmit.size() > 0) {
+                    isClickable(submit);
                     submit.click();
                     a += 1;
                     System.out.println("I applied for " + a + " applications");
-                    doneButton.click();
+                    try{
+
+                        doneButton.click();
+                    }
+                    catch (org.openqa.selenium.NoSuchElementException ex){
+                        cancelButton.click();
+                    }
 
                 }
                 if (errorMessage.size() > 0) {
