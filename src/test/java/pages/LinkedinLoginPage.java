@@ -18,9 +18,9 @@ public class LinkedinLoginPage extends Page{
     private WebElement signInButton;
 
 
-    public void loginIn() {
-        email.sendKeys("login");
-        password.sendKeys("password");
+    public void loginIn(String Login, String Password) {
+        email.sendKeys("nazmievbulat@gmail.com");
+        password.sendKeys("i4re3r2q");
         signInButton.click();
         new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("https://www.linkedin.com/feed"));
     }

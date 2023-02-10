@@ -8,14 +8,15 @@ public class LinkedinStepDefs {
     LinkedinLoginPage login = new LinkedinLoginPage();
     LinkedinJobsPage jobs = new LinkedinJobsPage();
 
-    @And("I Login to the linkedin account")
-    public void iLoginToTheLinkedinAccount() {
-        login.loginIn();
-    }
 
 
     @And("I apply for jobs")
     public void iApplyForJobs() {
         jobs.applyForJobs();
+    }
+
+    @And("I Login to the linkedin account with {string} and {string}")
+    public void iLoginToTheLinkedinAccountWithAnd(String loginCredential, String passwordCredential) {
+        login.loginIn(loginCredential, passwordCredential);
     }
 }
