@@ -24,7 +24,7 @@ public class GenericStepDefs {
             case "calculator" -> getDriver().get("https://www.calculator.net");
             case "careers" -> new CareersHome().open();
             case "linkedin" -> getDriver().get("https://www.linkedin.com/checkpoint/rm/sign-in-another-account?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin");
-            case "job" -> getDriver().get("https://www.linkedin.com/jobs/search/?currentJobId=3339961879&f_AL=true&f_F=qa&geoId=90000034&location=Denver%20Metropolitan%20Area&refresh=true&sortBy=R");
+            case "job" -> getDriver().get("https://www.linkedin.com/jobs/search/?currentJobId=3448342127&distance=25&f_AL=true&f_WT=2&geoId=103644278&keywords=selenium");
             case "boeing" -> new BoeingHome().open();
 
             default -> throw new Error("Unsupported page " + page);

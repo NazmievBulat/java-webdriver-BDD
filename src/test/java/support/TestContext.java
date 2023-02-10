@@ -1,4 +1,4 @@
-// Created by Viacheslav (Slava) Skryabin 04/01/2011
+
 package support;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -208,7 +208,8 @@ public class TestContext {
                 default:
                     throw new RuntimeException("Driver is not implemented for: " + browser);
             }
-        } else if (testEnv.equals("grid")){
+       }
+        else if (testEnv.equals("grid")){
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
             capabilities.setPlatform(Platform.ANY);

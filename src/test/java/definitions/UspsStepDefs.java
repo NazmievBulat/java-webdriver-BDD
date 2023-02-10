@@ -20,6 +20,16 @@ import static support.TestContext.driver;
 import static support.TestContext.getDriver;
 
 public class UspsStepDefs {
+
+    public void assertion(String actualResult, String expectedResult){
+        if(actualResult.contains(expectedResult)){
+            System.out.println("The result is good");
+        }
+        else{
+            throw new AssertionError();
+        }
+
+    }
     @When("I go to Lookup ZIP page by address")
     public void iGoToLookupZIPPageByAddress() {
         WebElement sendMenu = getDriver().findElement(By.xpath("//li[@class='qt-nav menuheader']"));
@@ -71,6 +81,7 @@ public class UspsStepDefs {
 
         String resultString = resultContainer.getText();
         assertThat(resultString).contains(zip);
+       assertion(resultString, zip);
     }
 
     @When("I go to Calculate Price Page")

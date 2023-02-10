@@ -11,7 +11,7 @@ import java.util.List;
 
 import static support.TestContext.driver;
 
-public class LinledinJobsPage extends Page {
+public class LinkedinJobsPage extends Page {
     @FindBy(xpath = "(//span[@class='artdeco-button__text'][normalize-space()='Easy Apply'])[1]")
     private List<WebElement> easyApplyList;
 
@@ -50,6 +50,12 @@ public class LinledinJobsPage extends Page {
     @FindBy(xpath = "//span[normalize-space()='Done']")
     private WebElement doneButton;
 
+    @FindBy(xpath = "(//span[@class='artdeco-button__text'][normalize-space()='Choose'])[1]")
+    private WebElement chooseFirstResume;
+
+    @FindBy(xpath = "(//span[@class='artdeco-button__text'][normalize-space()='Choose'])[1]")
+    private List <WebElement> chooseFirstResumeList;
+
     @FindBy(xpath = "//*[text() ='Please enter a valid answer']")
     private List<WebElement> errorMessage;
 
@@ -68,64 +74,91 @@ public class LinledinJobsPage extends Page {
 
         int a = 0;
 
-
-
-
-
-
         for (int r = 2; r < 40; r++){
         for (int i = 0; i < 25; i++) {
-            if (isClickable(easyApply) && continueButton.size() == 0) {
+
+
+
+            if (isClickable(easyApply)){
+
+                try {
+                    isClickable(easyApply);
+                    easyApply.click();
+                } catch (Exception ex) {
+                }
+
 
 
                 try {
-
-                    easyApply.click();
-                } catch (org.openqa.selenium.StaleElementReferenceException ex) {
-
-                    easyApply.click();
-                } catch (org.openqa.selenium.ElementClickInterceptedException ex) {
-
-                    i += 1;
-                }
-//                   easyApply.click();
-
-
-
-                while (reviewList.size() == 0 && errorMessage.size() == 0 && listSubmit.size() == 0) {
-
                     next.click();
+                    chooseFirstResume.click();
+                }catch (Exception ex){
+                    if (reviewList.size() > 0) {
+                        isClickable(review);
+                        review.click();
+                        try {
+                            isClickable(submit);
+                            submit.click();
+                            System.out.println("I applied for " + a + " applications");
+                        }catch (org.openqa.selenium.NoSuchElementException ex1){
+                            exitButton.click();
+                            WebDriverWait wait = new WebDriverWait(driver, 3);
+                            wait.until(ExpectedConditions.elementToBeClickable(saveButton));
+
+                            saveButton.click();
+                        }
 
 
+
+                        try{
+                            isClickable(doneButton);
+
+                            doneButton.click();
+                        }
+                        catch (org.openqa.selenium.NoSuchElementException ex2){
+                            cancelButton.click();
+                        }
+                        a += 1;
+
+
+                    }
+
+                    else if (errorMessage.size() > 0) {
+
+                        exitButton.click();
+                        WebDriverWait wait = new WebDriverWait(driver, 3);
+                        wait.until(ExpectedConditions.elementToBeClickable(saveButton));
+
+                        saveButton.click();
+                    }
                 }
-                if (reviewList.size() > 0) {
-                    review.click();
-                }
-                if (listSubmit.size() > 0) {
-                    isClickable(submit);
+
+                try {
+                    chooseFirstResume.click();
                     submit.click();
-                    a += 1;
-                    System.out.println("I applied for " + a + " applications");
-                    try{
-
-                        doneButton.click();
-                    }
-                    catch (org.openqa.selenium.NoSuchElementException ex){
-                        cancelButton.click();
-                    }
-
+                }catch (Exception ex){
+                    continue;
                 }
-                if (errorMessage.size() > 0) {
 
-                    exitButton.click();
-                    WebDriverWait wait = new WebDriverWait(driver, 3);
-                    wait.until(ExpectedConditions.elementToBeClickable(saveButton));
 
-                    saveButton.click();
-                }
+//                while (reviewList.size() == 0 && errorMessage.size() == 0 && listSubmit.size() == 0 && chooseFirstResumeList.size() == 0) {
+//
+//                    next.click();
+//
+//                }
+
+
+
+
+
 
             }
+            else{
+                i += 0.5;
+                System.out.println("This is line " + i);
+            }
             //int i = 0;
+
 
             try
             {
@@ -138,7 +171,7 @@ public class LinledinJobsPage extends Page {
             catch(org.openqa.selenium.NoSuchElementException ex){
                 //System.out.println("Element does not exist!");
 
-                i += 1;
+
             }
 
 

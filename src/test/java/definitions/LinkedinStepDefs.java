@@ -1,22 +1,16 @@
 package definitions;
 
 import io.cucumber.java.en.And;
-import pages.LinledinJobsPage;
-import pages.LinledinLoginPage;
+import pages.LinkedinJobsPage;
+import pages.LinkedinLoginPage;
 
 public class LinkedinStepDefs {
-    LinledinLoginPage login = new LinledinLoginPage();
-    LinledinJobsPage jobs = new LinledinJobsPage();
+    LinkedinLoginPage login = new LinkedinLoginPage();
+    LinkedinJobsPage jobs = new LinkedinJobsPage();
 
     @And("I Login to the linkedin account")
     public void iLoginToTheLinkedinAccount() {
-
-
         login.loginIn();
-
-
-
-
     }
 
 

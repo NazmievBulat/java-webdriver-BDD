@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static support.TestContext.driver;
 
-public class LinledinLoginPage extends Page{
+public class LinkedinLoginPage extends Page{
     @FindBy(xpath = "//input[@id='username']")
     private WebElement email;
 
