@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.time.Duration;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +43,7 @@ public class UspsStepDefs {
 
         getDriver().findElement(By.xpath("//p[@class='column-one-text']/../a[@data-location='byaddress']")).click();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement byAdress = wait.until(visibilityOfElementLocated(By.xpath("//div[@id='zip-lookup-app']")));
         String byAdress1 = byAdress.getText();
 
@@ -75,7 +76,7 @@ public class UspsStepDefs {
     @Then("I validate {string} zip code exists in the result")
     public void iValidateZipCodeExistsInTheResult(String zip) {
         WebElement resultContainer = getDriver().findElement(By.xpath("//div[@id='zipByAddressDiv']"));
-        WebDriverWait wait = new WebDriverWait(getDriver(), 5);
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         wait.until(visibilityOf(resultContainer));
 //        wait.until(driver -> resultContainer.getText().length())
 
@@ -107,6 +108,9 @@ public class UspsStepDefs {
     public void iDefineQuantity(String quantity) {
 
         getDriver().findElement(By.xpath("//input[@id='quantity-0']")).sendKeys(quantity);
+        String result = "Skip Search Results.7 results found for \"Free Boxes\"";
+        result.split(" ");
+
     }
 
     @Then("I calculate the price and validate cost is {string}")
@@ -140,7 +144,7 @@ public class UspsStepDefs {
     @And("I set {string} in filters")
     public void iSetInFilters(String filter) {
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement menuNavi = wait.until(visibilityOfElementLocated(By.xpath("//div[@id='dyn_nav_col']")));
 
         getDriver().findElement(By.xpath("//p[@title='" + filter + "']")).click();
@@ -149,7 +153,7 @@ public class UspsStepDefs {
     @Then("I verify that {string} results found")
     public void iVerifyThatResultsFound(String numberOfResults) {
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement searchResult = wait.until(visibilityOfElementLocated(By.xpath("//span[@id='searchResultsHeading']")));
         String result = getDriver().findElement(By.xpath("//span[@id='searchResultsHeading']")).getText();
         assertThat(result).contains(numberOfResults);
@@ -177,7 +181,7 @@ public class UspsStepDefs {
 //                String signIn = getDriver()
 //                        .findElement(By.xpath("//h1[@id='sign-in-to-your-account-header']")).getText();
 
-                WebDriverWait wait = new WebDriverWait(driver, 5);
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
                 wait.until(titleContains("Sign In"));
         getDriver().switchTo().window(originalWindow);
            // }
@@ -211,7 +215,7 @@ public class UspsStepDefs {
 
     @And("I choose view as {string} on the map")
     public void iChooseViewAsOnTheMap(String view) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(invisibilityOfElementLocated(By.xpath("//div[@class='white-spinner-progress']")));
         getDriver().findElement(By.xpath("//span[@class='"+view.toLowerCase()+"-view-icon']")).click();
     }
@@ -224,7 +228,7 @@ public class UspsStepDefs {
 
     @And("I close modal window")
     public void iCloseModalWindow() {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(visibilityOfElementLocated(By.xpath(
                 "//div[@id='drop-off-location-modal']//div[@class='modal-content modal-container']")));
         getDriver().findElement(By.xpath(
@@ -282,7 +286,7 @@ public class UspsStepDefs {
 
     @Then("I verify that no results of {string} available in help search")
     public void iVerifyThatNoResultsOfAvailableInHelpSearch(String searchResult) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(visibilityOfElementLocated(By.xpath("//ul[@class='slds-has-dividers--bottom']")));
     }
 
@@ -303,7 +307,7 @@ public class UspsStepDefs {
     @Then("I verify closest location phone number is {string}")
     public void iVerifyClosestLocationPhoneNumberIs(String phone) {
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(visibilityOfElementLocated(By.xpath("//div[@id='resultBox']")));
 
         List<WebElement> boxes = getDriver().findElements(By.xpath
@@ -316,7 +320,7 @@ public class UspsStepDefs {
                 ("//div[@class='col-md-12 col-xs-12']//p"));
         button.get(0).click();
 
-        WebDriverWait wait1 = new WebDriverWait(driver, 5);
+        WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait1.until(visibilityOfElementLocated(By.xpath("//div[@class='phone-wrapper']")));
 
         String phones = getDriver().findElement(By.xpath("//div[@class='phone-wrapper']")).getText();

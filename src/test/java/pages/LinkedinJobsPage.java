@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static support.TestContext.driver;
@@ -61,7 +62,7 @@ public class LinkedinJobsPage extends Page {
 
     public static boolean isClickable(WebElement element) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 1);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             wait.until(ExpectedConditions.elementToBeClickable(element));
             return true;
         } catch (Exception e) {
@@ -102,7 +103,7 @@ public class LinkedinJobsPage extends Page {
                             System.out.println("I applied for " + a + " applications");
                         }catch (org.openqa.selenium.NoSuchElementException ex1){
                             exitButton.click();
-                            WebDriverWait wait = new WebDriverWait(driver, 3);
+                            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
                             wait.until(ExpectedConditions.elementToBeClickable(saveButton));
 
                             saveButton.click();
@@ -126,7 +127,7 @@ public class LinkedinJobsPage extends Page {
                     else if (errorMessage.size() > 0) {
 
                         exitButton.click();
-                        WebDriverWait wait = new WebDriverWait(driver, 3);
+                        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
                         wait.until(ExpectedConditions.elementToBeClickable(saveButton));
 
                         saveButton.click();

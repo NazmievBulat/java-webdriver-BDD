@@ -2,10 +2,15 @@ package definitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.By;
 import pages.Cat;
 import pages.Dog;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+
+import static org.junit.Assert.assertThat;
+import static support.TestContext.getDriver;
 
 public class JavaStepDefs {
 
@@ -395,6 +400,13 @@ public class JavaStepDefs {
         Dog dog = new Dog("Bobby");
         dog.eat("meet");
         dog.walk();
+        String parFromCucumber = "7";
+
+        String result = "7 results found for \"Free Boxes\"";
+        String[]arr = result.split(" ");
+        String actualResult = arr[0];
+        assertThat(actualResult).isEqualTo(parFromCucumber);
+
     }
 }
 

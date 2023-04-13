@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 import static support.TestContext.driver;
 
 public class LinkedinLoginPage extends Page{
@@ -22,6 +24,6 @@ public class LinkedinLoginPage extends Page{
         email.sendKeys("nazmievbulat@gmail.com");
         password.sendKeys("i4re3r2q");
         signInButton.click();
-        new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("https://www.linkedin.com/feed"));
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("https://www.linkedin.com/feed"));
     }
 }

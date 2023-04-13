@@ -6,6 +6,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 import static support.TestContext.*;
 import static support.TestContext.driver;
 
@@ -24,7 +26,7 @@ public class Page {
     }
 
     public WebDriverWait getWait(){
-        return new WebDriverWait(getDriver(), getConfig().explicitTimeout);
+        return new WebDriverWait(getDriver(),Duration.ofSeconds(getConfig().explicitTimeout));
     }
 
     JavascriptExecutor js = (JavascriptExecutor) driver;

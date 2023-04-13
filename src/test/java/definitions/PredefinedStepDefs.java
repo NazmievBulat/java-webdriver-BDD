@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -55,12 +56,12 @@ public class PredefinedStepDefs {
 
     @Then("I wait for element with xpath {string} to be present")
     public void iWaitForElementWithXpathToBePresent(String xpath) {
-        new WebDriverWait(getDriver(), 10, 200).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10, 200)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
     }
 
     @Then("I wait for element with xpath {string} to not be present")
     public void iWaitForElementWithXpathToNotBePresent(String xpath) {
-        new WebDriverWait(getDriver(), 10, 200).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath))));
+        new WebDriverWait(getDriver(), Duration.ofSeconds(10, 200)).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath))));
     }
 
     @Then("element with xpath {string} should be displayed")

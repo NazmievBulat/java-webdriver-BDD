@@ -19,6 +19,7 @@ public class GenericStepDefs {
         switch (page.toLowerCase()) {
             case "quote" -> getDriver().get("https://skryabin.com/market/quote.html");
             case "google" -> getDriver().get("https://google.com");
+            case "amazon" -> getDriver().get("https://amazon.com");
             case "usps" -> getDriver().get("https://www.usps.com");
             case "unitconverts" -> getDriver().get("https://www.unitconverters.net");
             case "calculator" -> getDriver().get("https://www.calculator.net");

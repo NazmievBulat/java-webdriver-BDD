@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
+import java.time.Duration;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +43,7 @@ public class UpsStepDefs{
     public void iGoToCreateAShipment() {
         homePage.closePopup();
         homePage.goToShip();
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(visibilityOfElementLocated(By.xpath
                 ("//agent-wrapper[@class='ng-star-inserted']//section[@class='ups-section']")));
 //        shipPage.waitFields();

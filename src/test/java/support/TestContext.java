@@ -2,10 +2,7 @@
 package support;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,7 +15,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.yaml.snakeyaml.Yaml;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,6 +27,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -142,6 +144,16 @@ public class TestContext {
         return testData;
     }
 
+    public static Map<String, String> getDataFromFile(String objectName) {
+        try {
+            String path = System.getProperty("user.dir") + "/src/test/resources/data/" + objectName + ".yml";
+            InputStream stream = new FileInputStream(path);
+            return new Yaml().load(stream);
+        } catch (FileNotFoundException e) {
+            throw new Error(e);
+        }
+    }
+
 
     private static InputStream getStream(String project){
         try {
@@ -223,5 +235,24 @@ public class TestContext {
         } else {
             throw new RuntimeException("Unsupported test environment: " + testEnv);
         }
+
+
+    }
+    public static void selectByText(WebElement element, String text){
+        Select select = new Select(element);
+        select.selectByVisibleText(text);
+    }
+
+    public static void waitUntilElementVisible(WebElement webElement){
+        WebDriverWait wait = new WebDriverWait(TestContext.getDriver(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public static void waitUntilElementVisibleAndClickable(WebElement webElement){
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        wait.until (ExpectedConditions.visibilityOfAllElements (webElement));
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+
+
     }
 }

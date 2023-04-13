@@ -4,7 +4,7 @@
 
     @quote1
     Scenario Outline: Quote end to end oop
-      Given I go to "quote" page oop
+      Given I go to "quote" page
       When I fill out "<role>" required fields oop
       And I submit the page oop
       Then I verify "<role>" required fields oop
