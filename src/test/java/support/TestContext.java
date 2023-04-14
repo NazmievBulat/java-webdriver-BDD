@@ -2,10 +2,7 @@
 package support;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -181,6 +178,7 @@ public class TestContext {
                         chromeOptions.addArguments("--disable-gpu");
                     }
                     driver = new ChromeDriver(chromeOptions);
+                    chromeOptions.addArguments("--remote-allow-origins=*");
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
@@ -224,4 +222,8 @@ public class TestContext {
             throw new RuntimeException("Unsupported test environment: " + testEnv);
         }
     }
+
+    public static void selectByText(WebElement departmentDropdown, String department) {
+    }
+
 }
